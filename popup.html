@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Notice Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="main-container">
+    <button id="widget-btn">Widgets</button>
+    <div id="widget-panel" class="hidden">
+      <div class="widget-option" draggable="true" data-widget="google_slide.html">Google Slide</div>
+      <div class="widget-option" draggable="true" data-widget="pomodoro_timer.html">Pomodoro Timer</div>
+      <!-- Add more widget options here -->
+    </div>
+    <div id="home-screen">
+      <!-- Loaded widgets will appear here -->
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
