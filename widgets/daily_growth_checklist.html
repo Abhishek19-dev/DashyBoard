@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Growth Checklist</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      width: 100%; /* Make sure the widget fits within its container */
+      height: 100%; /* Make sure the widget fits within its container */
+    }
+    #checklist-container {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto; /* Scroll if the content is too long */
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .task {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .task input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .task button {
+      background: #bd9696;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .task button:hover {
+      background: #524746;
+    }
+    .add-task-container {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .add-task-container input[type="text"] {
+      flex: 1;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #000000;
+    }
+    .add-task-container button {
+      background: #93bea5;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .add-task-container button:hover {
+      background: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <div id="checklist-container">
+    <h2>Daily Growth Checklist</h2>
+    <div id="tasks-container">
+      <div class="task">
+        <input type="checkbox" id="task1">
+        <label for="task1">Complete morning workout</label>
+        <button class="remove-task-btn">Remove</button>
+      </div>
+      <div class="task">
+        <input type="checkbox" id="task2">
+        <label for="task2">Read 30 minutes</label>
+        <button class="remove-task-btn">Remove</button>
+      </div>
+      <div class="task">
+        <input type="checkbox" id="task3">
+        <label for="task3">Write daily journal</label>
+        <button class="remove-task-btn">Remove</button>
+      </div>
+    </div>
+    <div class="add-task-container">
+      <input type="text" id="new-task-input" placeholder="New task...">
+      <button id="add-task-btn">Add Task</button>
+    </div>
+  </div>
+  <script>
+    // JavaScript for managing tasks
+    document.addEventListener('DOMContentLoaded', () => {
+      const tasksContainer = document.getElementById('tasks-container');
+      const addTaskBtn = document.getElementById('add-task-btn');
+      const newTaskInput = document.getElementById('new-task-input');
+
+      // Add task
+      addTaskBtn.addEventListener('click', () => {
+        const taskText = newTaskInput.value.trim();
+        if (taskText) {
+          const taskDiv = document.createElement('div');
+          taskDiv.classList.add('task');
+          
+          taskDiv.innerHTML = `
+            <input type="checkbox">
+            <label>${taskText}</label>
+            <button class="remove-task-btn">Remove</button>
+          `;
+          
+          tasksContainer.appendChild(taskDiv);
+          newTaskInput.value = ''; // Clear input field
+        }
+      });
+
+      // Remove task
+      tasksContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-task-btn')) {
+          e.target.parentElement.remove();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

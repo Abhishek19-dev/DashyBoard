@@ -3,20 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Slide</title>
+  <title>Google Slide Widget</title>
   <style>
-    body {
+    body, html {
       margin: 0;
       padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       width: 100%;
       height: 100%;
+    }
+    .iframe-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
   </style>
 </head>
 <body>
-  <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTctG5de2P4G-PZ8hxL4LZrHrMYkXZ8mBJHiYtQ5wq6nMcwZ9nT7j2l5BxqOEhDxh_t6EOPPqIlkK6M/embed?start=false&loop=false&delayms=3000" frameborder="0" width="100%" height="100%"></iframe>
+  <div class="iframe-container">
+    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQdXDFqVRX6jCCf93h5CZUzhPsl3MGzvRhCePpVIOSUo89UOeZyD9-WykjMSxO5CzVkp1y4eD45XHTt/embed?start=false&loop=false&delayms=3000" allowfullscreen></iframe>
+  </div>
 </body>
 </html>
