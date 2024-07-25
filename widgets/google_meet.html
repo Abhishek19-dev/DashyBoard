@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Meet Widget</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap">
+  <link rel="icon" href="https://ssl.gstatic.com/meet/meet_icon_2024.ico" type="image/x-icon">
+  <style>
+    /* Styles for Google Meet widget */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #f5f5f5; /* Light background for the page */
+      margin: 0;
+      padding: 0;
+    }
+
+    .meet-container {
+      background: #ffffff; /* White background */
+      border-radius: 12px; /* Rounded corners */
+      padding: 20px; /* Padding inside the widget */
+      width: 350px; /* Fixed width */
+      height: 500px; /* Adjusted height */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for better visibility */
+      margin: 20px auto; /* Center align */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meet-header {
+      background-color: #0084ff; /* Google Meet header background color */
+      color: #ffffff; /* White header text color */
+      padding: 8px; /* Reduced padding */
+      border-radius: 12px 12px 0 0; /* Rounded top corners */
+      text-align: center;
+      font-size: 1.1em;
+      margin-bottom: 15px; /* Margin below header */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .meet-content {
+      flex: 1; /* Take remaining space */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .join-code {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .join-code input,
+    .join-code button {
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc; /* Light gray border */
+      border-radius: 8px;
+      font-size: 0.9em;
+      width: calc(100% - 2px); /* Adjust width to avoid overflow */
+      box-sizing: border-box; /* Include padding and border in width calculation */
+    }
+
+    .join-code input {
+      border-color: #007bff; /* Blue border for input */
+      margin-right: 0; /* Remove right margin to avoid overflow */
+    }
+
+    .join-code button {
+      background-color: #007bff; /* Blue button */
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .join-code button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .divider {
+      margin: 15px 0; /* Reduced margin */
+      border-top: 1px solid #ddd; /* Light gray divider */
+    }
+
+    .important-links {
+      margin-top: 15px; /* Reduced margin */
+      flex: 1; /* Take remaining space */
+      overflow-y: auto; /* Scroll if content overflows */
+    }
+
+    .important-links h3 {
+      margin: 0;
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .link-item {
+      margin-bottom: 10px; /* Reduced margin */
+      padding: 8px; /* Reduced padding */
+      border: 1px solid #eee; /* Light border for each link item */
+      border-radius: 8px;
+      background-color: #f9f9f9; /* Light background */
+    }
+
+    .link-item a {
+      color: #007bff; /* Blue color for links */
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+
+    .link-item a:hover {
+      text-decoration: underline; /* Underline on hover */
+    }
+
+    .link-item .time {
+      color: #888;
+      font-size: 0.8em; /* Reduced font size */
+    }
+
+    .team-heading {
+      font-size: 1em;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px; /* Reduced margin */
+    }
+  </style>
+</head>
+<body>
+  <div class="meet-container">
+    <div class="meet-header">
+      <h2>Google Meet</h2>
+    </div>
+    <div class="meet-content">
+      <div class="join-code">
+        <input type="text" id="meet-code" placeholder="Enter Meeting Code">
+        <button id="join-meet-btn">Join Meeting</button>
+      </div>
+      <div class="divider"></div>
+      <div class="important-links">
+        <h3>Important Meet Links Today:</h3>
+        <div class="link-item">
+          <div class="team-heading">Product Team</div>
+          <a href="https://meet.google.com/abc-defg-hij" target="_blank">Join Product Team Meeting</a>
+          <div class="time">10:00 AM - 11:00 AM</div>
+        </div>
+        <div class="link-item">
+          <div class="team-heading">Managing Team</div>
+          <a href="https://meet.google.com/klm-nopq-rst" target="_blank">Join Managing Team Meeting</a>
+          <div class="time">12:00 PM - 1:00 PM</div>
+        </div>
+        <!-- Add more links as needed -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const joinMeetBtn = document.getElementById('join-meet-btn');
+      const meetCodeInput = document.getElementById('meet-code');
+
+      joinMeetBtn.addEventListener('click', () => {
+        const meetCode = meetCodeInput.value.trim();
+
+        if (meetCode) {
+          // Construct the Google Meet URL
+          const meetURL = `https://meet.google.com/${meetCode}`;
+          
+          // Open the Google Meet URL in a new tab
+          window.open(meetURL, '_blank');
+        } else {
+          alert('Please enter a meeting code.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

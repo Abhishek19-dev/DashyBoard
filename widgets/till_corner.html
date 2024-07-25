@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIL Widget</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap">
+  <style>
+    /* Styles for TIL widget */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #e9ecef; /* Light background for the page */
+    }
+
+    .til-container {
+      background: #ffffff; /* White background */
+      border-radius: 12px; /* Rounded corners */
+      padding: 20px; /* Padding inside the widget */
+      width: 350px; /* Fixed width */
+      height: 450px; /* Reduced height */
+      overflow: hidden; /* Hide overflow to control scrolling */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Shadow for better visibility */
+      margin: 20px auto; /* Center align */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .til-header {
+      background-color: #007bff; /* Blue header background color */
+      color: #ffffff; /* White header text color */
+      padding: 15px;
+      border-radius: 12px 12px 0 0; /* Rounded top corners */
+      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 15px; /* Margin below header */
+      position: sticky; /* Fixed position for the header */
+      top: 0;
+      z-index: 1; /* Ensure header stays on top */
+    }
+
+    .til-content {
+      flex: 1; /* Take remaining space */
+      overflow-y: auto; /* Scroll if content overflows */
+      padding-bottom: 60px; /* Space for the fixed button */
+      /* Hide scrollbar for WebKit browsers */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer and Edge */
+    }
+
+    .til-content::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for WebKit browsers */
+    }
+
+    .til-item {
+      display: flex;
+      flex-direction: column; /* Stack title and summary vertically */
+      position: relative; /* For positioning the remove button */
+      margin-bottom: 10px; /* Reduced space between items */
+      padding: 12px;
+      border: 1px solid #ddd; /* Border around items */
+      border-radius: 12px; /* Rounded corners for items */
+      background-color: #f8f9fa; /* Light background for items */
+    }
+
+    .til-item h3 {
+      margin: 0;
+      font-size: 1.1em; /* Slightly smaller title font */
+      color: #333;
+    }
+
+    .til-item p {
+      margin: 8px 0 0 0; /* Margin above and below the text */
+      font-size: 0.9em; /* Slightly smaller font size */
+      color: #555;
+      line-height: 1.4; /* Line height for better readability */
+    }
+
+    .til-item::before {
+      content: '';
+      display: block;
+      border-top: 1px solid #ddd; /* Thin divider */
+      margin: 8px 0; /* Space around the divider */
+    }
+
+    .til-item button {
+      background-color: #ffffff; /* White button for remove */
+      color: #dc3545; /* Red text color */
+      border: 1px solid #dc3545; /* Red border */
+      border-radius: 50%; /* Rounded button */
+      padding: 5px; /* Smaller padding */
+      cursor: pointer;
+      font-size: 1em;
+      position: absolute;
+      right: 10px; /* Position the button to the right */
+      top: 10px; /* Position the button at the top */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for better visibility */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+    .til-item button::before {
+      content: '×'; /* Cross icon */
+      font-size: 1.2em; /* Larger icon size */
+    }
+
+    .til-item button:hover {
+      background-color: #f8d7da; /* Light red background on hover */
+      color: #dc3545; /* Maintain red text color on hover */
+    }
+
+    .til-form {
+      display: none; /* Hidden by default */
+      flex-direction: column;
+    }
+
+    .til-form input,
+    .til-form textarea {
+      margin-bottom: 12px;
+      padding: 10px;
+      border: 1px solid #ccc; /* Light gray border */
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .til-form button {
+      padding: 12px;
+      background-color: #007bff; /* Blue button */
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .til-form button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .til-controls {
+      position: sticky; /* Fixed position for the button */
+      bottom: 0;
+      background-color: #ffffff; /* White background */
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid #ddd; /* Divider line above button */
+      margin-top: 10px; /* Margin above button */
+    }
+
+    .til-controls button {
+      background-color: #007bff; /* Blue button */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .til-controls button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="til-container">
+    <div class="til-header">
+      <h2>Today I Learned (TIL)</h2>
+    </div>
+    <div class="til-content" id="til-content">
+      <!-- List of TIL items will appear here -->
+    </div>
+    <form class="til-form" id="til-form">
+      <input type="text" id="til-title" placeholder="Title" required>
+      <textarea id="til-summary" rows="4" placeholder="Summary" required></textarea>
+      <button type="submit">Add TIL</button>
+    </form>
+    <div class="til-controls">
+      <button id="add-til-btn">Add TIL</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tilForm = document.getElementById('til-form');
+      const tilContent = document.getElementById('til-content');
+      const addTilBtn = document.getElementById('add-til-btn');
+      let formVisible = false; // Form is hidden by default
+
+      function addItemToList(title, summary) {
+        const tilItem = document.createElement('div');
+        tilItem.className = 'til-item';
+
+        const removeButton = document.createElement('button');
+        removeButton.innerHTML = '×'; // Cross icon
+        removeButton.addEventListener('click', () => {
+          tilContent.removeChild(tilItem);
+        });
+
+        const itemTitle = document.createElement('h3');
+        itemTitle.textContent = title;
+
+        const itemSummary = document.createElement('p');
+        itemSummary.textContent = summary;
+
+        tilItem.appendChild(removeButton);
+        tilItem.appendChild(itemTitle);
+        tilItem.appendChild(itemSummary);
+
+        tilContent.appendChild(tilItem);
+      }
+
+      // Handle form submission
+      tilForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const title = document.getElementById('til-title').value;
+        const summary = document.getElementById('til-summary').value;
+
+        if (title && summary) {
+          addItemToList(title, summary);
+
+          // Clear form fields and hide form
+          tilForm.reset();
+          tilForm.style.display = 'none';
+          tilContent.style.display = 'block';
+          formVisible = false;
+          addTilBtn.textContent = 'Add TIL';
+        }
+      });
+
+      // Handle Add TIL button click
+      addTilBtn.addEventListener('click', () => {
+        if (formVisible) {
+          tilContent.style.display = 'block';
+          tilForm.style.display = 'none'; // Hide form
+          addTilBtn.textContent = 'Add TIL';
+        } else {
+          tilContent.style.display = 'none';
+          tilForm.style.display = 'flex'; // Show form
+          addTilBtn.textContent = 'Back to List';
+        }
+        formVisible = !formVisible;
+      });
+    });
+  </script>
+</body>
+</html>
