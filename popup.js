@@ -3,13 +3,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const widgetPanel = document.getElementById('widget-panel');
     const homeScreen = document.getElementById('home-screen');
     let isPanelVisible = false;
-  
+
     // Toggle widget panel visibility
     widgetBtn.addEventListener('click', () => {
       isPanelVisible = !isPanelVisible;
-      widgetPanel.classList.toggle('hidden', !isPanelVisible);
+      if (isPanelVisible) {
+        widgetPanel.classList.remove('hide');
+        widgetPanel.classList.add('show');
+        widgetBtn.textContent = 'Hide Widgets'; // Change button text
+      } else {
+        widgetPanel.classList.remove('show');
+        widgetPanel.classList.add('hide');
+        widgetBtn.textContent = 'Show Widgets'; // Change button text
+      }
     });
-  
+
     // Handle drag events for widgets
     document.querySelectorAll('.widget-option').forEach(widgetOption => {
       widgetOption.addEventListener('dragstart', (e) => {
