@@ -1,0 +1,33 @@
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  #chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  #message-input {
+    width: calc(100% - 80px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    box-sizing: border-box;
+  }
+  
+  #send-btn {
+    width: 70px;
+    margin: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
