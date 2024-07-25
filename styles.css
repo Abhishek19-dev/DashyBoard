@@ -19,6 +19,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
   overflow: hidden;
   display: flex;
+  flex-direction: column;
 }
 
 /* Widget button styles */
@@ -38,10 +39,10 @@ body {
 /* Widget panel styles */
 #widget-panel {
   position: absolute;
-  top: 0;
+  top: 50px; /* Adjust if needed */
   right: 0;
   width: 250px; /* Set fixed width for the panel */
-  height: 100%; /* Extend panel to the bottom of the screen */
+  height: calc(100% - 50px); /* Extend panel to the bottom of the screen minus the top bar height */
   background: rgba(255, 255, 255, 0.2); /* Glass-like background */
   backdrop-filter: blur(10px); /* Apply blur effect for glass-like appearance */
   border-radius: 0 0 10px 10px; /* Rounded bottom corners */
@@ -158,4 +159,38 @@ body {
   top: 0;
   left: 0;
   cursor: nw-resize;
+}
+
+/* Announcement section styles */
+#announcements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  font-size: 1.2em;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#announcement-text {
+  display: inline-block;
+  padding: 10px;
+  animation: scroll-left-right 12s linear infinite;
+}
+
+/* Keyframes for scrolling animation */
+@keyframes scroll-left-right {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

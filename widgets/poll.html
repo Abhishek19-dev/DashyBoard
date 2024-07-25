@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poll Widget</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .poll-container {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 350px;
+      max-width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .poll-header {
+      background-color: #007bff;
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 12px 12px 0 0;
+      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+
+    .poll-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .poll-question {
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .poll-options {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .poll-option {
+      margin-bottom: 10px;
+    }
+
+    .poll-option input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .poll-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9em;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .poll-button:hover {
+      background-color: #0056b3;
+    }
+
+    .results-section {
+      margin-top: 0; /* Remove any top margin */
+      display: none;
+    }
+
+    .results-section.active {
+      display: block;
+    }
+
+    .result-item {
+      margin: 5px 0; /* Reduced margin for better fit */
+      padding: 8px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    .result-item span {
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="poll-container">
+    <div class="poll-header">
+      Poll Widget
+    </div>
+    <div class="poll-content">
+      <div class="poll-question" id="poll-question">What is your favorite programming language?</div>
+      <div class="poll-options" id="poll-options">
+        <div class="poll-option">
+          <input type="radio" name="poll-option" value="JavaScript"> JavaScript
+        </div>
+        <div class="poll-option">
+          <input type="radio" name="poll-option" value="Python"> Python
+        </div>
+        <div class="poll-option">
+          <input type="radio" name="poll-option" value="Java"> Java
+        </div>
+        <div class="poll-option">
+          <input type="radio" name="poll-option" value="C++"> C++
+        </div>
+      </div>
+      <button class="poll-button" id="vote-btn">Vote</button>
+      <div class="results-section" id="results-section">
+        <h3>Results:</h3>
+        <div class="result-item" id="result-js">
+          <span>JavaScript:</span> <span id="result-js-count">0</span> votes
+        </div>
+        <div class="result-item" id="result-python">
+          <span>Python:</span> <span id="result-python-count">0</span> votes
+        </div>
+        <div class="result-item" id="result-java">
+          <span>Java:</span> <span id="result-java-count">0</span> votes
+        </div>
+        <div class="result-item" id="result-cpp">
+          <span>C++:</span> <span id="result-cpp-count">0</span> votes
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const voteBtn = document.getElementById('vote-btn');
+      const resultsSection = document.getElementById('results-section');
+      const pollQuestion = document.getElementById('poll-question');
+      const pollOptions = document.getElementById('poll-options');
+      const resultJsCount = document.getElementById('result-js-count');
+      const resultPythonCount = document.getElementById('result-python-count');
+      const resultJavaCount = document.getElementById('result-java-count');
+      const resultCppCount = document.getElementById('result-cpp-count');
+      
+      let pollResults = {
+        JavaScript: 0,
+        Python: 0,
+        Java: 0,
+        Cpp: 0
+      };
+
+      voteBtn.addEventListener('click', () => {
+        const selectedOption = document.querySelector('input[name="poll-option"]:checked');
+        if (selectedOption) {
+          pollResults[selectedOption.value] += 1;
+          updateResults();
+        } else {
+          alert('Please select an option.');
+        }
+      });
+
+      function updateResults() {
+        resultJsCount.textContent = pollResults.JavaScript;
+        resultPythonCount.textContent = pollResults.Python;
+        resultJavaCount.textContent = pollResults.Java;
+        resultCppCount.textContent = pollResults.Cpp;
+        resultsSection.classList.add('active');
+        pollQuestion.classList.add('hidden');
+        pollOptions.classList.add('hidden');
+        voteBtn.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
