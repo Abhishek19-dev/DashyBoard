@@ -35,24 +35,38 @@ body {
   cursor: pointer;
   z-index: 1000;
 }
+.hidden{
+  display: none;
+}
 
 /* Widget panel styles */
 #widget-panel {
   position: absolute;
-  top: 50px; /* Adjust if needed */
+  top: 50px;
   right: 0;
-  width: 250px; /* Set fixed width for the panel */
-  height: calc(100% - 50px); /* Extend panel to the bottom of the screen minus the top bar height */
-  background: rgba(255, 255, 255, 0.2); /* Glass-like background */
-  backdrop-filter: blur(10px); /* Apply blur effect for glass-like appearance */
-  border-radius: 0 0 10px 10px; /* Rounded bottom corners */
+  width: 250px;
+  height: calc(100% - 50px);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 10px 10px;
   padding: 10px;
+  transform: translateX(100%); /* Start off-screen */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+#widget-panel.show {
+  transform: translateX(0); /* Slide in */
+}
+
+#widget-panel.hide {
+  transform: translateX(100%); /* Slide out */
+}
+
 
 /* Widget option styles */
 .widget-option {
