@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer YOUR_API_KEY` // Replace with your API key
+          'Authorization': `sk-proj-a1LAx3wpczmTrBs4P7GdT3BlbkFJlIZ7uVooa45BDIJZIy1b` // Replace with your API key
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo', // Use the appropriate model

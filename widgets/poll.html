@@ -8,13 +8,13 @@
   <style>
     body {
       font-family: 'Nunito', sans-serif;
-      background-color: #f5f5f5;
+      background-color: rgba(0, 0, 0, 0.3);
       margin: 0;
       padding: 0;
     }
 
     .poll-container {
-      background: #ffffff;
+      background: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
       padding: 20px;
       width: 350px;
@@ -43,7 +43,7 @@
     .poll-question {
       font-size: 1.1em;
       margin-bottom: 15px;
-      color: #333;
+      color: #ffffff;
     }
 
     .poll-options {
@@ -53,6 +53,7 @@
 
     .poll-option {
       margin-bottom: 10px;
+      color: white;
     }
 
     .poll-option input[type="radio"] {
@@ -124,7 +125,7 @@
       </div>
       <button class="poll-button" id="vote-btn">Vote</button>
       <div class="results-section" id="results-section">
-        <h3>Results:</h3>
+        <h3 style="color: rgb(214, 198, 255);">Results:</h3>
         <div class="result-item" id="result-js">
           <span>JavaScript:</span> <span id="result-js-count">0</span> votes
         </div>
