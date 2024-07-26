@@ -7,15 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Toggle widget panel visibility
   widgetBtn.addEventListener('click', () => {
       isPanelVisible = !isPanelVisible;
-      if (isPanelVisible) {
-          widgetPanel.classList.remove('hide');
-          widgetPanel.classList.add('show');
-          widgetBtn.textContent = 'Hide Widgets'; // Change button text
-      } else {
-          widgetPanel.classList.remove('show');
-          widgetPanel.classList.add('hide');
-          widgetBtn.textContent = 'Show Widgets'; // Change button text
-      }
+      widgetPanel.classList.toggle('show', isPanelVisible);
+      widgetPanel.classList.toggle('hide', !isPanelVisible);
+      widgetBtn.textContent = isPanelVisible ? 'Hide Widgets' : 'Show Widgets';
   });
 
   // Handle drag events for widgets
