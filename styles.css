@@ -9,6 +9,7 @@ body {
   height: 100vh;
   background: url('images/background.jpg') no-repeat center center fixed;
   background-size: cover;
+  backdrop-filter: blur(5px); /* Adding blur effect */
 }
 
 /* Main container styles */
@@ -35,7 +36,9 @@ body {
   cursor: pointer;
   z-index: 1000;
 }
-.hidden{
+
+/* Hidden class */
+.hidden {
   display: none;
 }
 
@@ -56,7 +59,7 @@ body {
   flex-direction: column;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
 }
 
 #widget-panel.show {
@@ -67,10 +70,9 @@ body {
   transform: translateX(100%); /* Slide out */
 }
 
-
 /* Widget option styles */
 .widget-option {
-  width: 100px; /* Set fixed width for widgets */
+  width: calc(100% - 20px); /* Adjust width to account for padding */
   height: 100px; /* Set fixed height for widgets */
   margin: 10px 0;
   padding: 10px;
@@ -85,6 +87,14 @@ body {
   text-align: center;
   font-size: 14px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
+  margin-right: 10px; /* Shift widget boxes to the left */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for widget options */
+.widget-option:hover {
+  background: rgba(97, 121, 218, 0.8); /* Translucent purple background */
+  transform: scale(1.1); /* Slightly increase the size of the box */
 }
 
 /* Widget preview styles */
@@ -104,15 +114,17 @@ body {
   padding: 10px;
   background: url('images/background.jpg') no-repeat center center fixed;
   background-size: cover;
+  backdrop-filter: blur(5px); /* Adding blur effect */
 }
 
 /* Widget container styles */
 .widget-container {
   position: absolute;
-  background: rgba(255, 255, 255, 0); /* Fully transparent background */
-  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  backdrop-filter: blur(5px); /* Added blur effect for glass-like appearance */
+  border-radius: 10px; /* Optional: rounded corners */
   overflow: hidden;
-  cursor: default;
+  cursor: grab;
   border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: add a subtle border */
 }
 
@@ -148,7 +160,6 @@ body {
   background: rgba(0, 0, 0, 0.5);
   width: 10px;
   height: 10px;
-  cursor: pointer;
 }
 
 .resize-handle-bottom-right {
@@ -182,12 +193,12 @@ body {
   left: 0;
   width: 100%;
   background-color: #333;
-  color: #fff;
-  font-size: 1.2em;
+  color: #ffee05;
+  font-size: 1.4em;
   overflow: hidden;
   white-space: nowrap;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  background: rgba(97, 121, 218, 0.8); /* Adjusted background */
 }
 
 #announcement-text {
